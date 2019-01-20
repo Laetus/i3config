@@ -133,6 +133,11 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 assign [class="Firefox"] $ws1
 assign [class="Spotify"] $ws8
 
+
+# move workspace to different monitors
+bindsym $mod+n move workspace to output left
+bindsym $mod+m move workspace to output right
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -171,7 +176,7 @@ bindsym $mod+r mode "resize"
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
+set $inactive-text-color #babfc
 set $urgent-bg-color     #E53935
 
 # window colors
@@ -200,6 +205,14 @@ bar {
 
 bindsym $mod+shift+x exec i3lock
 
+# Lock screen
+bindsym $mod+p exec --no-startup-id "i3lock -i ~/Pictures/wallpapers/tardisface.png -f -c ffffff"
+bindsym $mod+shift+p exec --no-startup-id "i3lock -i ~/Pictures/wallpapers/tardisface.png -f -c ffffff && systemctl suspend"
+bindsym $mod+shift+h exec --no-startup-id "i3lock -i ~/Pictures/wallpapers/tardisface.png -f -c ffffff && systemctl hibernate"
+
+# Keyboard Layout
+bindsym $mod+x exec setxkbmap de
+bindsym $mod+c exec setxkbmap us
 
 #### Custom stuff
 # Pulse Audio controls
@@ -211,9 +224,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# Touchpad controls
-bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
-
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
@@ -224,3 +234,5 @@ bindsym XF86AudioPrev exec playerctl previous
 exec firefox 
 exec_always feh  --bg-fill  /home/laetus/Pictures/wallpapers/arj-567106-1920x1080.jpg
 exec com.spotify.Client
+exec --no-startup-id xautolock -time 4 -locker "i3lock -i ~/Pictures/wallpapers/tardisface.png -f -c fffff"
+exec_always numlockx on
